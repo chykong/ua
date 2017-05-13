@@ -105,7 +105,7 @@ public class SysUserDao {
      * @return
      */
     public SysUser getByUsername(String username) {
-        String sql = "select *,(select name from t_sys_department where id=department_id) department_name,(select name from t_sys_role where id=role_id) role_name from t_sys_user where username=?";
+        String sql = "select *,(select name from t_sys_role where id=role_id) role_name from t_sys_user where username=?";
         Object[] params = new Object[]{username};
         List<SysUser> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(SysUser.class));
         if (list.size() > 0)
@@ -133,7 +133,7 @@ public class SysUserDao {
      * @return
      */
     public List<SysUser> list(SysUserSearchVO sysUserSearchVO) {
-        String sql = "select *,(select name from t_sys_department where id=department_id) department_name," + "(select name from t_sys_role where id=role_id) role_name  from t_sys_user where 1=1 ";
+        String sql = "select *," + "(select name from t_sys_role where id=role_id) role_name  from t_sys_user where 1=1 ";
         sql += createSearchSql(sysUserSearchVO);
         sql += " order by id asc";
         sql = PageUtil.createMysqlPageSql(sql, sysUserSearchVO.getPageIndex(), sysUserSearchVO.getPageSize());
