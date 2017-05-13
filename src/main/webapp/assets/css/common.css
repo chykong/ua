@@ -1,0 +1,163 @@
+* {
+	font-family: 'microsoft yahei', 'Times New Roman', 宋体, Times, serif;
+}
+
+input.valiError {
+	border: 2px solid red;
+	background-color: #FFFFD5;
+}
+
+label.valiError {
+	color: red;
+	margin-left: 4px;
+	margin-top: 4px;
+	float: auto;
+}
+
+.errMsg {
+	color: red;
+}
+
+a {
+	color: blue;
+	text-decoration: none;
+}
+
+.pagination {
+	display: inline-block;
+	padding-left: 0;
+	margin: 0px 0;
+	border-radius: 4px;
+}
+
+table tr td {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+
+.panel-green {
+	border-color: #5cb85c
+}
+
+.panel-green .panel-heading {
+	border-color: #5cb85c;
+	color: #fff;
+	background-color: #5cb85c
+}
+
+.panel-green a {
+	color: #5cb85c
+}
+
+.panel-green a:hover {
+	color: #3d8b3d
+}
+
+.panel-red {
+	border-color: #d9534f
+}
+
+.panel-red .panel-heading {
+	border-color: #d9534f;
+	color: #fff;
+	background-color: #d9534f
+}
+
+.panel-red a {
+	color: #d9534f
+}
+
+.panel-red a:hover {
+	color: #b52b27
+}
+
+.panel-yellow {
+	border-color: #f0ad4e
+}
+
+.panel-yellow .panel-heading {
+	border-color: #f0ad4e;
+	color: #fff;
+	background-color: #f0ad4e
+}
+
+.panel-yellow a {
+	color: #f0ad4e
+}
+
+.panel-yellow a:hover {
+	color: #df8a13
+}
+
+.panel-dark {
+	border-color: #6F3CC4
+}
+
+.panel-dark .panel-heading {
+	border-color: #6F3CC4;
+	color: #fff;
+	background-color: #6F3CC4
+}
+
+.panel-dark a {
+	color: #6F3CC4
+}
+
+.panel-dark a:hover {
+	color: #8256cb
+}
+
+.panel-pink {
+	border-color: #CB6FD7
+}
+
+.panel-pink .panel-heading {
+	border-color: #CB6FD7;
+	color: #fff;
+	background-color: #CB6FD7
+}
+
+.panel-pink a {
+	color: #CB6FD7
+}
+
+.panel-pink a:hover {
+	color: #9873d5
+}
+
+.panel-blue {
+	border-color: #6FB3E0
+}
+
+.panel-blue .panel-heading {
+	border-color: #6FB3E0;
+	color: #fff;
+	background-color: #6FB3E0
+}
+
+.panel-blue a {
+	color: #6FB3E0
+}
+
+.panel-blue a:hover {
+	color: #85bee4
+}
+
+.panel-orange2 {
+	border-color: #F79263
+}
+
+.panel-orange2 .panel-heading {
+	border-color: #F79263;
+	color: #fff;
+	background-color: #F79263
+}
+
+.panel-orange2 a {
+	color: #F79263
+}
+
+.panel-orange2 a:hover {
+	color: #f9a379
+}
