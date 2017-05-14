@@ -67,7 +67,7 @@ public class SysUserDao extends BaseDao {
      * @return
      */
     public int updateStatus(int id, int status) {
-        String sql = "update t_sys_user set status=?  where id=";
+        String sql = "update t_sys_user set status=?  where id=?";
         Object[] objects = new Object[]{status, id};
         return jdbcTemplate.update(sql, objects);
     }
