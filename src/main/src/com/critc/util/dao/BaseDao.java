@@ -15,9 +15,11 @@ public class BaseDao {
 
     /**
      * 获取  NamedParameterJdbcTemplate
+     *
      * @return
      */
     protected NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
         return new NamedParameterJdbcTemplate(jdbcTemplate);
     }
+
 }

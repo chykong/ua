@@ -3,14 +3,11 @@ package com.critc.sys.dao;
 import com.critc.common.vo.ComboboxVO;
 import com.critc.sys.model.SysUser;
 import com.critc.sys.vo.SysUserSearchVO;
+import com.critc.util.dao.BaseDao;
 import com.critc.util.page.PageUtil;
 import com.critc.util.string.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -18,17 +15,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class SysUserDao {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+public class SysUserDao extends BaseDao {
 
     public int add(SysUser sysUser) {
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
         String sql = "insert into t_sys_user(username,password,randomcode,status,realname,create_date,create_person,role_id,type)";
         sql += " values(:username,:password,:randomcode,1,:realname,now(),:create_person,:role_id,:type)";
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysUser);
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        int rc = namedParameterJdbcTemplate.update(sql, paramSource, keyHolder);
+        int rc = getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(sysUser), keyHolder);
         if (rc > 0) {
             return keyHolder.getKey().intValue();
         } else {
@@ -38,9 +31,7 @@ public class SysUserDao {
 
     public int update(SysUser sysUser) {
         String sql = "update t_sys_user set realname=:realname,role_id=:role_id where id=:id ";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysUser);
-        return namedParameterJdbcTemplate.update(sql, paramSource);
+        return getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(sysUser));
     }
 
     /**
@@ -65,9 +56,7 @@ public class SysUserDao {
      */
     public int updateInfo(SysUser sysUser) {
         String sql = "update t_sys_user set realname=:realname,telephone=:telephone where id=:id";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysUser);
-        return namedParameterJdbcTemplate.update(sql, paramSource);
+        return getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(sysUser));
     }
 
     /**
@@ -137,9 +126,7 @@ public class SysUserDao {
         sql += createSearchSql(sysUserSearchVO);
         sql += " order by id asc";
         sql = PageUtil.createMysqlPageSql(sql, sysUserSearchVO.getPageIndex(), sysUserSearchVO.getPageSize());
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysUserSearchVO);
-        List<SysUser> list = namedParameterJdbcTemplate.query(sql, paramSource, new BeanPropertyRowMapper<>(SysUser.class));
+        List<SysUser> list = getNamedParameterJdbcTemplate().query(sql, new BeanPropertySqlParameterSource(sysUserSearchVO), new BeanPropertyRowMapper<>(SysUser.class));
         return list;
     }
 
@@ -159,9 +146,7 @@ public class SysUserDao {
     public int listCount(SysUserSearchVO sysUserSearchVO) {
         String sql = "select count(*) from t_sys_user where 1=1 ";
         sql += createSearchSql(sysUserSearchVO);
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysUserSearchVO);
-        return namedParameterJdbcTemplate.queryForObject(sql, paramSource, Integer.class);
+        return getNamedParameterJdbcTemplate().queryForObject(sql, new BeanPropertySqlParameterSource(sysUserSearchVO), Integer.class);
     }
 
     private String createSearchSql(SysUserSearchVO sysUserSearchVO) {
@@ -189,10 +174,9 @@ public class SysUserDao {
      *
      * @return
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<ComboboxVO> listAllUser() {
         String sql = "select id value,username content from t_sys_user  order by id";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(ComboboxVO.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ComboboxVO.class));
     }
 
 

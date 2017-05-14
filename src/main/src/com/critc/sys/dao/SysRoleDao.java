@@ -1,34 +1,26 @@
 package com.critc.sys.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
-
 import com.critc.common.vo.ComboboxVO;
 import com.critc.sys.model.SysRole;
 import com.critc.sys.model.SysRoleFunction;
 import com.critc.sys.model.SysRoleModule;
+import com.critc.util.dao.BaseDao;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
-public class SysRoleDao {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+public class SysRoleDao extends BaseDao {
 
     public int add(SysRole sysRole) {
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
         String sql = "insert into t_sys_role(name,description,create_date,is_delete,create_person)" + " values(:name,:description,now(),:is_delete,:create_person)";
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysRole);
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        int rc = namedParameterJdbcTemplate.update(sql, paramSource, keyHolder);
+        int rc = getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(sysRole), keyHolder);
         if (rc > 0) {
             return keyHolder.getKey().intValue();
         } else {
@@ -38,9 +30,7 @@ public class SysRoleDao {
 
     public int update(SysRole sysRole) {
         String sql = "update t_sys_role set name=:name,description=:description where id=:id";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysRole);
-        return namedParameterJdbcTemplate.update(sql, paramSource);
+        return getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(sysRole));
     }
 
     /**
@@ -96,11 +86,10 @@ public class SysRoleDao {
      * @param role_id
      * @return
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<SysRoleModule> listRoleModule(int role_id) {
         String sql = "select * from t_sys_rolemodule where role_id=? ";
         Object[] params = new Object[]{role_id};
-        List<SysRoleModule> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(SysRoleModule.class));
+        List<SysRoleModule> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(SysRoleModule.class));
         return list;
     }
 
@@ -138,7 +127,7 @@ public class SysRoleDao {
      * 新增角色对应功能
      *
      * @param role_id
-     * @param module_id
+     * @param function_id
      */
     public void addRoleFunction(int role_id, int function_id) {
         String sql = "insert into t_sys_rolefunction(role_id,function_id) values(?,?)";
@@ -152,11 +141,10 @@ public class SysRoleDao {
      * @param role_id
      * @return
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<SysRoleFunction> listRoleFunction(int role_id) {
         String sql = "select * from t_sys_rolefunction where role_id=? ";
         Object[] params = new Object[]{role_id};
-        List<SysRoleFunction> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(SysRoleFunction.class));
+        List<SysRoleFunction> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(SysRoleFunction.class));
         return list;
     }
 

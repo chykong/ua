@@ -1,33 +1,24 @@
 package com.critc.sys.dao;
 
 import com.critc.sys.model.SysModule;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.critc.util.dao.BaseDao;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class SysModuleDao {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+public class SysModuleDao extends BaseDao {
 
     public int add(SysModule sysModule) {
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
         String sql = "insert into t_sys_module(name,code,parent_id,url,target,iconImg,display_order) values(:name,:code,:parent_id,:url,:target,:iconImg,:display_order)";
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysModule);
-        return namedParameterJdbcTemplate.update(sql, paramSource);
+        return getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(sysModule));
     }
 
     public int update(SysModule sysModule) {
         String sql = "update t_sys_module set name=:name,code=:code,url=:url,parent_id=:parent_id,target=:target,iconImg=:iconImg,display_order=:display_order where id=:id";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(sysModule);
-        return namedParameterJdbcTemplate.update(sql, paramSource);
+        return getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(sysModule));
     }
 
     public int delete(int id) {
@@ -114,7 +105,6 @@ public class SysModuleDao {
      * @param url
      * @return
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public SysModule getByUrl(String url) {
         String sql = "select m.* from t_sys_module m where url=? ";
         Object[] params = new Object[]{url};
