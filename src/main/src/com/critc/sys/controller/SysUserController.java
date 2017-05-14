@@ -9,7 +9,6 @@ import com.critc.sys.vo.SysUserSearchVO;
 import com.critc.util.backurl.BackUrlUtil;
 import com.critc.util.config.PubConfig;
 import com.critc.util.controller.BaseController;
-import com.critc.util.global.GlobalConst;
 import com.critc.util.json.JsonUtil;
 import com.critc.util.page.PageNavigate;
 import com.critc.util.session.SessionUtil;
@@ -225,7 +224,7 @@ public class SysUserController extends BaseController {
         ModelAndView mv = new ModelAndView();
         int recordCount = sysUserLoginService.listCount(id);// 获取查询总数
         int pageIndex = WebUtil.getSafeInt(request.getParameter("pageIndex"), 1);// 获取当前页数
-        int pageSize = GlobalConst.pageSize;// 直接取全局变量，每页记录数
+        int pageSize = 10;//  每页记录数
         String url = createUserLoginUrl(id, pageIndex, pageSize);
         PageNavigate pageNavigate = new PageNavigate(url, pageIndex, pageSize, recordCount);//
         List<SysUserLogin> list = sysUserLoginService.list(id, pageNavigate.getPageIndex(), pageSize);
