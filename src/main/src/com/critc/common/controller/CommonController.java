@@ -1,7 +1,6 @@
 package com.critc.common.controller;
 
 import com.critc.common.service.CommonService;
-import com.critc.dic.service.DicProvinceService;
 import com.critc.sys.service.SysModuleService;
 import com.critc.sys.service.SysRoleService;
 import com.critc.sys.service.SysUserService;
@@ -30,8 +29,6 @@ public class CommonController {
     private SysUserService sysUserService;
     @Autowired
     private SysModuleService sysModuleService;
-    @Autowired
-    private DicProvinceService dicProvinceService;
     @Autowired
     private SysRoleService sysRoleService;
 
