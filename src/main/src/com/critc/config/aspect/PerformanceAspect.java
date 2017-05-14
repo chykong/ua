@@ -2,6 +2,7 @@ package com.critc.config.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
  * 用于监控系统性能，service层性能有问题的记录下来
  * Created by 孔垂云 on 2017/5/13.
  */
+@Aspect
 public class PerformanceAspect {
     private static Logger logger = LoggerFactory.getLogger("performanceLog");
 
@@ -17,7 +19,8 @@ public class PerformanceAspect {
         Object result = null;
         long l = System.currentTimeMillis();
         result = joinPoint.proceed();
-        if (System.currentTimeMillis() - l > 1000) {
+        long consume = System.currentTimeMillis() - l;
+        if (consume > 1000) {
             //记录系统操作较慢的service处理过程
             logger.info("实体类:" + joinPoint.getTarget());
             logger.info("方法名:" + joinPoint.getSignature().getName());
@@ -26,6 +29,7 @@ public class PerformanceAspect {
             for (int i = 0; i < args.length; i++) {
                 logger.info("方法参数：" + i + " -- " + args[i]);
             }
+            logger.info("用时：" + consume);
         }
         return result;
     }
