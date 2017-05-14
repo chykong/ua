@@ -97,7 +97,7 @@
     <!-- 系统性能监控切面-->
     <bean id="performanceAspect" class="com.critc.config.aspect.PerformanceAspect"/>
 
-    <!--EhCache缓存配置 -->
+    <!--EhCache缓存配置
     <bean id="cacheManagerFactory"
           class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:conf/ehcache.xml"/>
@@ -105,7 +105,7 @@
     <cache:annotation-driven cache-manager="cacheManager"/>
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager" ref="cacheManagerFactory"/>
-    </bean>
+    </bean>-->
 
     <!-- druid监控-->
     <bean id="druid-stat-interceptor"
