@@ -1,10 +1,9 @@
 package com.critc.sys.model;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
 
 /**
  * 操作日志
@@ -115,4 +114,20 @@ public class SysLog {
 		this.user_code = user_code;
 	}
 
+	@Override
+	public String toString() {
+		return "SysLog{" +
+				"id=" + id +
+				", user_id=" + user_id +
+				", opera_date=" + opera_date +
+				", opera_ip='" + opera_ip + '\'' +
+				", module_name='" + module_name + '\'' +
+				", opera_name='" + opera_name + '\'' +
+				", opera_url='" + opera_url + '\'' +
+				", opera_type=" + opera_type +
+				", opera_params='" + opera_params + '\'' +
+				", realname='" + realname + '\'' +
+				", user_code='" + user_code + '\'' +
+				'}';
+	}
 }

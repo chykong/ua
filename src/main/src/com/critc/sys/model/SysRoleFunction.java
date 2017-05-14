@@ -29,4 +29,13 @@ public class SysRoleFunction {
 	public void setFunction_id(int function_id) {
 		this.function_id = function_id;
 	}
+
+	@Override
+	public String toString() {
+		return "SysRoleFunction{" +
+				"id=" + id +
+				", role_id=" + role_id +
+				", function_id=" + function_id +
+				'}';
+	}
 }

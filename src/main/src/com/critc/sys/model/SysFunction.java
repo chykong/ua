@@ -99,4 +99,19 @@ public class SysFunction {
 		this.module_name = module_name;
 	}
 
+	@Override
+	public String toString() {
+		return "SysFunction{" +
+				"id=" + id +
+				", module_id=" + module_id +
+				", module_name='" + module_name + '\'' +
+				", name='" + name + '\'' +
+				", code='" + code + '\'' +
+				", url='" + url + '\'' +
+				", type=" + type +
+				", description='" + description + '\'' +
+				", display_order=" + display_order +
+				", checked=" + checked +
+				'}';
+	}
 }

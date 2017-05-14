@@ -32,5 +32,14 @@ public class SysConfig {
 	public void setDisplay_order(int display_order) {
 		this.display_order = display_order;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "SysConfig{" +
+				"syskey='" + syskey + '\'' +
+				", sysvalue='" + sysvalue + '\'' +
+				", description='" + description + '\'' +
+				", display_order=" + display_order +
+				'}';
+	}
 }

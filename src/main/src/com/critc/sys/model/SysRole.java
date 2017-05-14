@@ -57,11 +57,6 @@ public class SysRole {
         this.create_date = create_date;
     }
 
-    @Override
-    public String toString() {
-        return "SysRole [id=" + id + ", name=" + name + ", description=" + description + ",  is_delete=" + is_delete + ", create_date=" + create_date + "]";
-    }
-
     public String getCreate_person() {
         return create_person;
     }
@@ -70,5 +65,15 @@ public class SysRole {
         this.create_person = create_person;
     }
 
-
+    @Override
+    public String toString() {
+        return "SysRole{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", is_delete=" + is_delete +
+                ", create_date=" + create_date +
+                ", create_person='" + create_person + '\'' +
+                '}';
+    }
 }

@@ -80,4 +80,17 @@ public class SysModuleVO {
 		this.display_order = display_order;
 	}
 
+	@Override
+	public String toString() {
+		return "SysModuleVO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", parent_id=" + parent_id +
+				", url='" + url + '\'' +
+				", icon='" + icon + '\'' +
+				", target='" + target + '\'' +
+				", display_order=" + display_order +
+				", cnt=" + cnt +
+				'}';
+	}
 }

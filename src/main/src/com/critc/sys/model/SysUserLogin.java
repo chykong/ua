@@ -2,10 +2,6 @@ package com.critc.sys.model;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 /**
  * 用户登录信息
  * @author chykong
@@ -28,8 +24,6 @@ public class SysUserLogin {
 	public void setId(int id) {
 		this.id = id;
 	}
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getLogin_date() {
 		return login_date;
 	}
@@ -76,5 +70,18 @@ public class SysUserLogin {
 
 	public void setExplorerVersion(String explorerVersion) {
 		this.explorerVersion = explorerVersion;
+	}
+
+	@Override
+	public String toString() {
+		return "SysUserLogin{" +
+				"id=" + id +
+				", user_id=" + user_id +
+				", login_date=" + login_date +
+				", login_ip='" + login_ip + '\'' +
+				", terminal='" + terminal + '\'' +
+				", explorerType='" + explorerType + '\'' +
+				", explorerVersion='" + explorerVersion + '\'' +
+				'}';
 	}
 }

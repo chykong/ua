@@ -36,4 +36,12 @@ public class SysLogSearchVO extends PageSearchVO {
         this.e_date = e_date;
     }
 
+    @Override
+    public String toString() {
+        return "SysLogSearchVO{" +
+                "user_id=" + user_id +
+                ", s_date='" + s_date + '\'' +
+                ", e_date='" + e_date + '\'' +
+                '}';
+    }
 }
